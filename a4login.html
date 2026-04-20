@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+
+<style>
+body {
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(to right, green, blue);
+    font-family:Arial;
+}
+.login-box {
+    background:white;
+    padding:20px;
+    width:250px;
+    text-align:center;
+}
+input { width:100%; padding:6px; }
+</style>
+
+</head>
+<body>
+
+<div class="login-box">
+<h2>Login</h2>
+
+<form id="loginForm">
+<input type="text" id="loginUsername" placeholder="Username" required><br><br>
+<input type="password" id="loginPassword" placeholder="Password" required><br><br>
+
+<span id="num1"></span> + <span id="num2"></span> =
+<input type="text" id="captchaInput" required><br><br>
+
+<input type="submit" value="Login">
+</form>
+
+<p><a href="a4signup.html">Sign Up</a></p>
+</div>
+
+<script>
+let n1=Math.floor(Math.random()*10);
+let n2=Math.floor(Math.random()*10);
+document.getElementById("num1").innerText=n1;
+document.getElementById("num2").innerText=n2;
+
+document.getElementById("loginForm").addEventListener("submit",function(e){
+    e.preventDefault();
+
+    let u=document.getElementById("loginUsername").value;
+    let p=document.getElementById("loginPassword").value;
+    let c=document.getElementById("captchaInput").value;
+
+    let su=localStorage.getItem("username");
+    let sp=localStorage.getItem("password");
+
+    if(parseInt(c)!==n1+n2){ alert("Wrong captcha"); return; }
+
+    if(u===su && p===sp){
+        alert("Login successful");
+        window.location.href="index.html";
+    } else {
+        alert("Invalid");
+    }
+});
+</script>
+
+</body>
+</html>
